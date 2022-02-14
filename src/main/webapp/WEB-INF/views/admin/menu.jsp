@@ -25,7 +25,6 @@
 			<button id="consultation" class="btn btn-primary">お問い合わせ管理</button>
 			<button id="consultation" class="btn btn-primary">スライドイメージ管理</button>
 		</div>
-
 	</div>
 	<form action="" method="post"></form>
 	<script>
