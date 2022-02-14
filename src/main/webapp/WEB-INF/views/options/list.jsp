@@ -43,8 +43,18 @@ td.item {
 						<td class="no">${options.no }</td>
 						<td class="item">${options.item }</td>
 						<td class="cost">${options.cost }</td>
-						<td class="activity">${options.activity }</td>
-						<td class="deleteFlag">${options.deleteFlag }</td>
+						<c:if test="${admin != null }">
+							<td><c:choose>
+									<c:when test='${options.activity eq "0".charAt(0) }'>活性</c:when>
+									<c:when test='${options.activity eq "1".charAt(0) }'>非活性</c:when>
+								</c:choose></td>
+						</c:if>
+						<c:if test="${admin != null }">
+							<td><c:choose>
+									<c:when test='${options.deleteFlag eq "0".charAt(0) }'>表示</c:when>
+									<c:when test='${options.deleteFlag eq "1".charAt(0) }'>非表示</c:when>
+								</c:choose></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -53,10 +63,12 @@ td.item {
 	<button id="addoptions" class="btn btn-primary">登録</button>
 	<form></form>
 	<script>
-		$('tr').click(function() {
-			$('form').attr('action', '/options/details/' + $(this).attr('id'));
-			$('form').submit();
-		});
+		$('tr').click(
+				function() {
+					$('form').attr('action',
+							'/sliderImages/details/' + $(this).attr('id'));
+					$('form').submit();
+				});
 	</script>
 </body>
 </html>

@@ -26,7 +26,7 @@ td.title {
 </head>
 <body>
 	<c:set var="user" value='${admin }' scope="session" />
-	<h3>お知らせ</h3>
+	<h3>スライドイメージ管理</h3>
 	<table class="table table-hover table-bordered table-light">
 		<thead>
 			<tr>
@@ -34,7 +34,6 @@ td.title {
 				<th>イメージ</th>
 				<th>活性化</th>
 				<th>表示状態</th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -42,40 +41,38 @@ td.title {
 				<c:forEach var="sliderImages" items='${sliderImagesList}'>
 					<tr id="${sliderImages.no }">
 						<td class="no">${sliderImages.no }</td>
-						<td class="fileName">${sliderImages.no }</td>
-						<td class="activity">${sliderImages.activity }</td>
-						<td class="deleteFlag">${sliderImages.deleteFlag }</td>
-						<td>
-							<button id="mod" class="modSliderImages btn btn-warning">修正</button>
+						<td class="fileName"><img
+							src="../../resources/Img/${sliderImages.fileName }" width="240px">
 						</td>
+						<td><c:choose>
+								<c:when test='${sliderImages.activity eq "0".charAt(0) }'>活性</c:when>
+								<c:when test='${sliderImages.activity eq "1".charAt(0) }'>非活性</c:when>
+							</c:choose></td>
+						<td><c:choose>
+								<c:when test='${sliderImages.deleteFlag eq "0".charAt(0) }'>表示</c:when>
+								<c:when test='${sliderImages.deleteFlag eq "1".charAt(0) }'>非表示</c:when>
+							</c:choose></td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</tbody>
 	</table>
 	<c:if test="${user != null }">
-		<button id="addsliderImages" class="btn btn-secondary">登録</button>
+		<button id="addSliderImages" class="btn btn-secondary">登録</button>
 	</c:if>
 	<form></form>
 	<script>
-		$('').click(
+		$('tr').click(
 				function() {
-					$('form').attr(
-							'action',
-							'/sliderImages/details/'
-									+ $(this).parent().attr('id'));
+					$('form').attr('action',
+							'/sliderImages/details/' + $(this).attr('id'));
 					$('form').submit();
 				});
 
-		$('.modsliderImages').click(
-				function() {
-					$('form').attr(
-							'action',
-							'/admin/modSliderImages/'
-									+ $(this).parent().parent().attr('id'));
-
-					$('form').submit();
-				});
+		$('#addSliderImages').click(function() {
+			$('form').attr('action', '/sliderImages/addForm/');
+			$('form').submit();
+		});
 	</script>
 </body>
 </html>

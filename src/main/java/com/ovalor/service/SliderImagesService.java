@@ -11,6 +11,8 @@ public interface SliderImagesService {
 	ArrayList<SliderImagesVo> getAllSliderImagesList();
 
 	SliderImagesVo getSliderImages(int no);
+	
+	int addSliderImages(SliderImagesVo img);
 
 	int modSliderImages(SliderImagesVo img);
 

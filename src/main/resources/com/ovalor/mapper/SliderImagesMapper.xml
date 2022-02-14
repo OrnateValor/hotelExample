@@ -26,7 +26,8 @@
 	<!-- Insert -->
 	<insert id="addSliderImg">
 		INSERT INTO slider_images VALUES(
-		nextval('slider_images_seq'), #{fileName}, #{sortNo}, default,
+		nextval('slider_images_seq'), #{fileName},
+		currval('slider_images_seq'), default,
 		default, now(), now(), 8
 		)
 	</insert>

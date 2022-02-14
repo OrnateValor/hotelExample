@@ -83,31 +83,7 @@ public class RoomInfoController {
 			return "redirect:/admin/main";
 		}
 
-		/* 이미지 파일 저장 */
-		// 저장 경로
-		// String uploadPath =
-		// "C:\\Users\\1\\eclipse-workspace\\ovalor\\src\\main\\webapp\\resources\\Img"
-		String uploadPath = session.getServletContext().getRealPath("/resources/Img/");
-		log.info("uploadPath : " + uploadPath);
-		File dir = new File(uploadPath);
-		log.info("dir Exists : " + dir.exists());
-
-		// 해당 경로가 존재하지 않을 경우, 경로 생성
-		if (!dir.exists()) {
-			log.info("if");
-			dir.mkdirs();
-			log.info("after mkdir : " + dir.exists());
-		}
-
-		// 원본 파일명 - SHA256으로 컨버트
-		String originalFilename = CustomUtill.encryptSha(imgs.getOriginalFilename());
-		// String originalFilename = imgs.getOriginalFilename();
-
-		// 저장될 파일 껍데기 - 파일 위치와 파일 이름을 갖고 있음.
-		File savFile = new File(uploadPath, originalFilename);
-
-		// 파일 저장 이후 roomInfo 객체에 해당 경로 저장.
-		imgs.transferTo(savFile);
+		String originalFilename = CustomUtill.upFiles(imgs, session);
 		roomInfo.setImages(originalFilename);
 
 		int result = riService.addRoomInfo(roomInfo);

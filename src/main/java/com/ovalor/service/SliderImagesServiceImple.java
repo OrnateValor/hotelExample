@@ -32,6 +32,13 @@ public class SliderImagesServiceImple implements SliderImagesService {
 		return siMapper.getSliderImg(no);
 	}
 
+	// Insert
+	@Override
+	public int addSliderImages(SliderImagesVo img) {
+		// TODO Auto-generated method stub
+		return siMapper.addSliderImg(img);
+	}
+
 	// Update
 	@Override
 	public int modSliderImages(SliderImagesVo img) {

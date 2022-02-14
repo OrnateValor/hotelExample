@@ -206,7 +206,7 @@ public class AdminController {
 		return "/options/list";
 	}
 
-	@PostMapping("/sliderImages")
+	@RequestMapping("/sliderImages")
 	public String sliderImages(Model model, RedirectAttributes reAttr, HttpSession session) {
 		log.info("Admin :: sliderImages");
 		// auth Chk -> getAdmin from session and ChkAuth

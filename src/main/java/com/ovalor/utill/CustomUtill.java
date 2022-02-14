@@ -1,14 +1,19 @@
 package com.ovalor.utill;
 
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ovalor.vo.AdminUser;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 @Component
 public class CustomUtill {
 	public static AdminUser getAdmin(HttpSession session) {
@@ -55,6 +60,35 @@ public class CustomUtill {
 		}
 		// 이렇게 버퍼로 저장된 버퍼를 문자열로 변환하여 반환.
 		return hexBuffer.toString();
+	}
+
+	public static String upFiles(MultipartFile file, HttpSession session) throws Exception {
+		/* 이미지 파일 저장 */
+		// 저장 경로
+		// String uploadPath =
+		// "C:\\Users\\1\\eclipse-workspace\\ovalor\\src\\main\\webapp\\resources\\Img"
+		String uploadPath = session.getServletContext().getRealPath("/resources/Img/");
+		log.info("uploadPath : " + uploadPath);
+		File dir = new File(uploadPath);
+		log.info("dir Exists : " + dir.exists());
+
+		// 해당 경로가 존재하지 않을 경우, 경로 생성
+		if (!dir.exists()) {
+			log.info("if");
+			dir.mkdirs();
+			log.info("after mkdir : " + dir.exists());
+		}
+
+		// 원본 파일명 - SHA256으로 컨버트
+		String originalFilename = CustomUtill.encryptSha(file.getOriginalFilename());
+		// String originalFilename = fileName.getOriginalFilename();
+
+		// 저장될 파일 껍데기 - 파일 위치와 파일 이름을 갖고 있음.
+		File savFile = new File(uploadPath, originalFilename);
+
+		// 파일 저장 이후 객체에 해당 경로 저장.
+		file.transferTo(savFile);
+		return originalFilename;
 	}
 
 }

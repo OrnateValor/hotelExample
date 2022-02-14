@@ -37,8 +37,8 @@
 							<td>${roomInfo.max }</td>
 							<c:if test="${admin != null }">
 								<td><c:choose>
-										<c:when test="${roomInfo.deleteFlag != 0 }">非表示</c:when>
-										<c:when test="${roomInfo.deleteFlag != 1 }">表示</c:when>
+										<c:when test='${roomInfo.deleteFlag eq "0".charAt(0) }'>表示</c:when>
+										<c:when test='${roomInfo.deleteFlag eq "1".charAt(0) }'>非表示</c:when>
 									</c:choose></td>
 							</c:if>
 						</tr>
