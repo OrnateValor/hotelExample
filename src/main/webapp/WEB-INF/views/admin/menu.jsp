@@ -23,7 +23,7 @@
 			<button id="roomInfo" class="btn btn-primary">宿泊プラン管理</button>
 			<button id="options" class="btn btn-primary">宿泊オプション管理</button>
 			<button id="consultation" class="btn btn-primary">お問い合わせ管理</button>
-			<button id="consultation" class="btn btn-primary">スライドイメージ管理</button>
+			<button id="sliderImages" class="btn btn-primary">スライドイメージ管理</button>
 		</div>
 	</div>
 	<form action="" method="post"></form>
@@ -34,26 +34,37 @@
 				location.replace("/admin/main");
 			}
 		});
+
 		$('#notice').click(function() {
 			$('form').attr("action", "/admin/notice");
 			$('form').submit();
 		});
+
 		$('#booking').click(function() {
 			$('form').attr("action", "/admin/booking");
 			$('form').submit();
 		});
+
 		$('#roomInfo').click(function() {
 			$('form').attr("action", "/admin/roomInfo");
 			$('form').submit();
 		});
+
 		$('#options').click(function() {
 			$('form').attr("action", "/admin/options");
 			$('form').submit();
 		});
+
 		$('#consultation').click(function() {
 			$('form').attr("action", "/admin/consultation");
 			$('form').submit();
 		});
+
+		$('#sliderImages').click(function() {
+			$('form').attr("action", "/admin/sliderImages");
+			$('form').submit();
+		});
+
 		$('#logout').click(function() {
 			$('form').attr("action", "/admin/logout");
 			$('form').submit();

@@ -15,6 +15,7 @@ import com.ovalor.service.ConsultationService;
 import com.ovalor.service.NoticeService;
 import com.ovalor.service.OptionsService;
 import com.ovalor.service.RoomInfoService;
+import com.ovalor.service.SliderImagesService;
 import com.ovalor.utill.CustomUtill;
 import com.ovalor.vo.AdminUser;
 import com.ovalor.vo.NoticeVo;
@@ -32,6 +33,7 @@ public class AdminController {
 	private RoomInfoService riService;
 	private ConsultationService cService;
 	private OptionsService oService;
+	private SliderImagesService sService;
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
@@ -174,7 +176,7 @@ public class AdminController {
 	}
 
 	// Admin :: consultation
-	@PostMapping("")
+	@PostMapping("/consultation")
 	public String consultation(Model model, RedirectAttributes reAttr, HttpSession session) {
 		log.info("Admin :: consultation");
 		// auth Chk -> getAdmin from session and ChkAuth
@@ -202,6 +204,21 @@ public class AdminController {
 
 		model.addAttribute("optionsList", oService.getOptionsList());
 		return "/options/list";
+	}
+
+	@PostMapping("/sliderImages")
+	public String sliderImages(Model model, RedirectAttributes reAttr, HttpSession session) {
+		log.info("Admin :: sliderImages");
+		// auth Chk -> getAdmin from session and ChkAuth
+		boolean auth = CustomUtill.authChk(session);
+		if (!auth) {
+			log.info("auth:" + auth);
+			reAttr.addFlashAttribute("auth", auth);
+			return "redirect:main";
+		}
+
+		model.addAttribute("sliderImagesList", sService.getAllSliderImagesList());
+		return "/sliderImages/list";
 	}
 
 }

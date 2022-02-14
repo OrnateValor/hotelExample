@@ -8,6 +8,8 @@ public interface SliderImagesMapper {
 	// GetList
 	public ArrayList<SliderImagesVo> getSliderImgList();
 
+	public ArrayList<SliderImagesVo> getAllSliderImgList();
+
 	// Select
 	public SliderImagesVo getSliderImg(int no);
 
@@ -16,4 +18,7 @@ public interface SliderImagesMapper {
 
 	// Update
 	public int modSliderImg(SliderImagesVo sliderImages);
+
+	// Delete
+	public int delSliderImages(int no);
 }
