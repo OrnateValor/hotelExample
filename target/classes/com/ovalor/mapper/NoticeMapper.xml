@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ovalor.mapper.NoticeMapper">
+	<!-- GetList -->
+	<select id="getNoticeList" resultType="com.ovalor.vo.NoticeVo">
+		SELECT
+		*
+		FROM
+		notice
+		WHERE
+		build_code = 8
+		AND delete_flag = '0'
+		ORDER BY
+		no DESC;
+	</select>
+
+	<!-- Select -->
+	<select id="getNotice" resultType="com.ovalor.vo.NoticeVo">
+		SELECT * FROM notice WHERE
+		build_code=8 AND no = #{no}
+	</select>
+
+	<!-- Insert -->
+	<insert id="addNotice">
+		INSERT INTO notice VALUES(
+		nextval('notice_seq'),
+		#{title}, #{contents}, 0, now(), now(), 8
+		)
+	</insert>
+
+	<!-- Update -->
+	<update id="modNotice">
+		UPDATE notice
+		SET
+		title=#{title},
+		contents=#{contents},
+		updated_at=now()
+		WHERE no=#{no}
+	</update>
+
+	<!-- Delete - deleteFlag -->
+	<update id="delNotice">
+		UPDATE notice
+		SET delete_flag=1
+		WHERE no=#{no}
+	</update>
+</mapper>

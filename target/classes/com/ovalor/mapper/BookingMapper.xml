@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ovalor.mapper.BookingMapper">
+	<!-- GetList -->
+	<select id="getBookingList" resultType="com.ovalor.vo.BookingVo">
+		SELECT
+		*
+		FROM
+		booking
+		WHERE
+		build_code = 8
+		AND delete_flag = '0'
+		ORDER BY
+		payment_flag ASC, no DESC
+	</select>
+	<!-- Select -->
+	<select id="getBookingListByName" resultType="com.ovalor.vo.BookingVo">
+		SELECT * FROM booking WHERE
+		name = #{name} AND phone = #{phone} AND build_code=8
+	</select>
+	<!-- Select -->
+	<select id="getBookingByNo" resultType="com.ovalor.vo.BookingVo">
+		SELECT
+		*
+		FROM
+		booking
+		WHERE
+		no = #{no} AND build_code=8
+	</select>
+	<!-- Insert -->
+	<insert id="addBooking">
+		INSERT INTO booking
+		VALUES(
+		nextval('booking_seq'),
+		#{roomNo}, #{name},
+		#{phone}, #{adult}, #{child}, #{startDate},
+		#{endDate}, #{options},
+		default, #{totalCost}, default,
+		#{bankName},
+		#{bankBranchCode}, #{bankAccountNumber}, default,
+		now(),
+		now(), 8
+		)
+	</insert>
+
+	<!-- Update -->
+	<update id="modBooking">
+		UPDATE booking
+		SET room_no=#{roomNo}, name=#{name},
+		phone=#{phone}, adult=#{adult}, child=#{child},
+		start_date=#{startDate}, end_date=#{endDate}, options=#{options},
+		total_cost=#{totalCost},
+		bank_name=#{bankName},
+		bank_branch_code=#{bankBranchCode},
+		bank_account_number=#{bankAccountNumber},
+		updated_at=now()
+		WHERE
+		no=#{no}
+	</update>
+
+	<!-- Update Payment -->
+	<update id="modBookingPayment">
+		UPDATE booking
+		SET payment_flag=1
+		WHERE
+		no=#{no}
+	</update>
+
+	<!-- Cancle Booking -->
+	<update id="cancelBooking">
+		UPDATE booking
+		SET cancel_flag=1
+		WHERE
+		no=#{no}
+	</update>
+
+	<!-- Modify paymentFlag 0 to 1 -->
+	<update id="modPayment">
+		UPDATE booking
+		SET payment_flag=1
+		WHERE
+		no=#{filterJSON}
+	</update>
+
+</mapper>

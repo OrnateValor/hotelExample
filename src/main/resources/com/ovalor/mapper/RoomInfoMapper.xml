@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ovalor.mapper.RoomInfoMapper">
+	<!-- GetList -->
+	<select id="getRoomList" resultType="com.ovalor.vo.RoomInfoVo">
+		<!-- room_Info 가 대소문자 혼용이라 ""로 씌워줘야 함. -->
+		SELECT
+		*
+		FROM
+		"room_Info"
+		WHERE
+		build_code = 8
+		AND delete_flag = '0'
+		ORDER BY
+		room_num ASC
+	</select>
+
+	<!-- GetList For Admin -->
+	<select id="getRoomInfoListAdmin"
+		resultType="com.ovalor.vo.RoomInfoVo">
+		<!-- room_Info 가 대소문자 혼용이라 ""로 씌워줘야 함. -->
+		SELECT
+		*
+		FROM
+		"room_Info"
+		WHERE
+		build_code = 8
+		ORDER BY
+		room_num ASC
+	</select>
+
+	<!-- Select -->
+	<select id="getRoom" resultType="com.ovalor.vo.RoomInfoVo">
+		SELECT * FROM "room_Info" WHERE
+		no=#{no} AND build_code=8
+	</select>
+
+	<!-- Insert And Update query Automatically Return "Int", doesn't need resultType -->
+
+	<!-- Insert -->
+	<insert id="addRoomInfo">
+		INSERT INTO "room_Info"
+		VALUES(nextval('room_info_seq'), #{roomNum}, #{roomTitle}, #{max},
+		#{adultCost}, #{childCost}, #{explanation}, #{images}, #{colorCode},
+		default, now(), now(), 8)
+	</insert>
+
+	<!-- Update -->
+	<update id="modRoomInfo">
+		UPDATE "room_Info"
+		SET room_num=#{roomNum},
+		room_title=#{roomTitle},
+		max=#{max}, adult_cost=#{adultCost},
+		child_cost=#{childCost},
+		explanation=#{explanation}, images=#{images},
+		color_code=#{colorCode}, updated_at=now()
+		WHERE
+		no=#{no}
+	</update>
+
+	<!-- Delete -->
+	<delete id="delRoomInfo">
+		UPDATE "room_Info"
+		SET delete_flag = #{deleteFlag}
+		WHERE
+		no=#{no}
+	</delete>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ovalor.mapper.OptionsMapper">
+	<!-- GetList -->
+	<select id="getOptionsList" resultType="com.ovalor.vo.OptionsVo">
+		SELECT * FROM options
+		ORDER BY no ASC
+	</select>
+	<!-- Select -->
+	<select id="getOptions" resultType="com.ovalor.vo.OptionsVo">
+		SELECT * FROM options WHERE
+		no=#{no}
+	</select>
+	<!-- Insert -->
+	<insert id="addOptions">
+		INSERT INTO options
+		VALUES(
+		nextval('options_seq'),
+		#{item}, #{cost}, default, default, now(), now()
+		)
+	</insert>
+	<!-- Update -->
+	<update id="modOptions">
+		UPDATE options
+		SET item=#{item}, cost=#{cost},
+		activity=#{activity},
+		delete_flag=#{deleteFlag},
+		created_at=#{createdAt},
+		updated_at=now()
+		WHERE no=#{no}
+	</update>
+	<!-- Delete - deleteFlag -->
+	<update id="delOptions">
+		UPDATE options
+		SET delete_flag=#{deleteFlag},
+		WHERE
+		no=${no}
+	</update>
+</mapper>
