@@ -45,10 +45,17 @@ public class SliderImagesServiceImple implements SliderImagesService {
 		return siMapper.modSliderImg(img);
 	}
 
+	@Override
+	public int inActive(SliderImagesVo img) {
+		// TODO Auto-generated method stub
+		return siMapper.inActive(img);
+	}
+
 	// Delete
 	@Override
-	public int delSliderImages(int no) {
-		return siMapper.delSliderImages(no);
+	public int del(int no) {
+		// TODO Auto-generated method stub
+		return siMapper.del(no);
 	}
 
 }

@@ -9,9 +9,9 @@ public class SliderImagesVo {
 	int no;
 	String fileName;
 	String sortNo;
-	char activity;
-	char deleteFlag;
+	char activity = '0';
+	char deleteFlag = '0';
 	Date createdAt;
 	Date updatedAt;
-	int buildCode;
+	int buildCode = 8;
 }

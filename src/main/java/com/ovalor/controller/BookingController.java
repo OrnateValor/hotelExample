@@ -20,6 +20,7 @@ import com.ovalor.service.OptionsService;
 import com.ovalor.service.RoomInfoService;
 import com.ovalor.vo.BookingReAttr;
 import com.ovalor.vo.BookingVo;
+import com.ovalor.vo.OptionsVo;
 import com.ovalor.vo.RoomInfoVo;
 
 import lombok.AllArgsConstructor;
@@ -123,6 +124,8 @@ public class BookingController {
 		// variable Part
 		ArrayList<BookingVo> bookingList = new ArrayList<BookingVo>();
 		BookingVo booking = new BookingVo();
+		OptionsVo options = new OptionsVo();
+
 		int varNo = 0;
 		String varName = name;
 		String varPhone = phone;
@@ -137,6 +140,11 @@ public class BookingController {
 			}
 			booking.returnDate();
 			model.addAttribute("booking", booking);
+			options.setItem("なし");
+			if (!booking.getOptions().equals("")) {
+				options = oService.getOptions(Integer.parseInt(booking.getOptions()));
+			}
+			model.addAttribute("options", options);
 			model.addAttribute("roomInfo", rService.getRoomInfo(booking.getRoomNo()));
 			return "booking/details";
 		} else if (varName != null && varPhone != null) {
@@ -145,7 +153,7 @@ public class BookingController {
 				bookingVo.returnDate();
 			}
 			model.addAttribute("bookingList", bookingList);
-			model.addAttribute("options", oService.getOptions(Integer.parseInt(booking.getOptions())));
+
 			return "booking/searchList";
 		} else {
 			return "booking/noBooking";

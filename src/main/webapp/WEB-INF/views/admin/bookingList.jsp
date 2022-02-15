@@ -43,11 +43,24 @@ th, td {
 							</td>
 							<td class='term'>${booking.startDate }<br>~${booking.endDate }
 							</td>
-							<td class='paymentFlag'>${booking.paymentFlag }</td>
-							<th>
-								<button id='${booking.no }' class='payment btn btn-primary'
-									type='button'>処理</button>
-							</th>
+							<td class='paymentFlag'><c:choose>
+									<c:when test='${booking.paymentFlag eq "0".charAt(0) }'>
+										未決済
+									</c:when>
+									<c:when test='${booking.paymentFlag eq "1".charAt(0) }'>決済完了</c:when>
+								</c:choose></td>
+							<th><c:choose>
+									<c:when test='${booking.paymentFlag eq "0".charAt(0) }'>
+										<button id='${booking.no }' class='payment btn btn-primary'
+											type='button'>処理</button>
+									</c:when>
+									<c:when test='${booking.paymentFlag eq "1".charAt(0) }'>
+										<button id='${booking.no }'
+											class='payment btn btn-outline-primary' type='button'
+											disabled>決済完了</button>
+									</c:when>
+								</c:choose></th>
+
 						</tr>
 					</c:forEach>
 				</c:if>

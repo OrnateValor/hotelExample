@@ -1,7 +1,5 @@
 package com.ovalor.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
@@ -9,11 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ovalor.service.BookingService;
-import com.ovalor.service.ConsultationService;
-import com.ovalor.service.NoticeService;
-import com.ovalor.service.OptionsService;
-import com.ovalor.service.RoomInfoService;
 import com.ovalor.service.SliderImagesService;
 
 import lombok.AllArgsConstructor;
@@ -33,14 +26,7 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		log.info("Project Activated!!");
 
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
 		model.addAttribute("sliderImagesList", sService.getSliderImagesList());
-		model.addAttribute("serverTime", formattedDate);
-
 		return "home";
 	}
 }

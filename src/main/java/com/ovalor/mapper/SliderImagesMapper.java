@@ -20,5 +20,9 @@ public interface SliderImagesMapper {
 	public int modSliderImg(SliderImagesVo sliderImages);
 
 	// Delete
-	public int delSliderImages(int no);
+	public int del(int no);
+
+	// inActive
+	public int inActive(SliderImagesVo img);
+
 }

@@ -20,13 +20,13 @@
 		<div>
 			<div>活性化</div>
 			<div>
-				<input type="checkbox" id="activity" name="activity">
+				<input type="checkbox" id="activity" name="activity" value="1">
 			</div>
 		</div>
 		<div>
 			<div>削除</div>
 			<div>
-				<input type="checkbox" id="deleteFlag" name="deleteFlag">
+				<input type="checkbox" id="deleteFlag" name="deleteFlag" value="1">
 			</div>
 		</div>
 	</form>

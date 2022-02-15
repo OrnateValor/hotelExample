@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,8 +41,7 @@ public class SliderImagesController {
 
 	@PostMapping("/add")
 	@Transactional
-	public String addSliderImages(SliderImagesVo img,
-			MultipartFile file, Model model, RedirectAttributes reAttr,
+	public String addSliderImages(SliderImagesVo img, MultipartFile file, Model model, RedirectAttributes reAttr,
 			HttpSession session) throws Exception {
 		log.info("addSliderImagesProc");
 		boolean auth = CustomUtill.authChk(session);
@@ -65,6 +65,15 @@ public class SliderImagesController {
 		return "redirect:/admin/sliderImages";
 	}
 
+	// Select
+	@GetMapping("/details/{no}")
+	public String getRoomInfo(@PathVariable("no") int no, Model model) {
+		log.info("getSliderImage");
+		model.addAttribute("sliderImages", sService.getSliderImages(no));
+		// return url
+		return "sliderImages/details";
+	}
+
 	@GetMapping("/mod/{no}")
 	public String modSliderImagesForm(int no, Model model, RedirectAttributes reAttr, HttpSession session) {
 		log.info("modSliderImages");
@@ -72,11 +81,47 @@ public class SliderImagesController {
 		log.info("auth:" + auth);
 		if (!auth) {
 			reAttr.addFlashAttribute("auth", auth);
-			return "redirect:main";
+			return "redirect:/admin/main";
 		}
 
 		model.addAttribute("sliderImages", sService.getSliderImages(no));
 
 		return "";
+	}
+
+	@RequestMapping("/inActive")
+	public String inActive(SliderImagesVo img, Model model, RedirectAttributes reAttr, HttpSession session) {
+		log.info("inActive SliderImages");
+		boolean auth = CustomUtill.authChk(session);
+		log.info("auth:" + auth);
+		if (!auth) {
+			reAttr.addFlashAttribute("auth", auth);
+			return "redirect:/admin/main";
+		}
+
+		int result = sService.inActive(img);
+		if (result < 1) {
+			reAttr.addFlashAttribute("sliderImages", sService.getSliderImages(img.getNo()));
+			return ("redirect:details/" + Integer.toString(img.getNo()));
+		}
+		return "redirect:/admin/sliderImages";
+	}
+
+	@RequestMapping("/del")
+	public String del(int no, Model model, RedirectAttributes reAttr, HttpSession session) {
+		log.info("inActive SliderImages");
+		boolean auth = CustomUtill.authChk(session);
+		log.info("auth:" + auth);
+		if (!auth) {
+			reAttr.addFlashAttribute("auth", auth);
+			return "redirect:/admin/main";
+		}
+
+		int result = sService.del(no);
+		if (result < 1) {
+			reAttr.addFlashAttribute("sliderImages", sService.getSliderImages(no));
+			return ("redirect:details/" + Integer.toString(no));
+		}
+		return "redirect:/admin/sliderImages";
 	}
 }

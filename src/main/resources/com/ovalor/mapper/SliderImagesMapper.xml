@@ -10,12 +10,13 @@
 		resultType="com.ovalor.vo.SliderImagesVo">
 		SELECT * FROM slider_images WHERE build_code=8 AND
 		delete_flag = '0' AND activity = '0'
+		ORDER BY no ASC;
 	</select>
 
 	<select id="getAllSliderImgList"
 		resultType="com.ovalor.vo.SliderImagesVo">
-		SELECT * FROM slider_images WHERE build_code=8
-
+		SELECT * FROM slider_images WHERE build_code=8 ORDER BY no
+		ASC;
 	</select>
 
 	<!-- Select -->
@@ -27,8 +28,9 @@
 	<insert id="addSliderImg">
 		INSERT INTO slider_images VALUES(
 		nextval('slider_images_seq'), #{fileName},
-		currval('slider_images_seq'), default,
-		default, now(), now(), 8
+		currval('slider_images_seq'), ${activity},
+		${deleteFlag}, now(), now(),
+		8
 		)
 	</insert>
 	<!-- Update -->
@@ -41,6 +43,24 @@
 		created_at=#{createdAt},
 		updated_at=now(),
 		build_code=#{buildCode}
+		WHERE
+		no=#{no}
+	</update>
+
+	<!-- inActive -->
+	<update id="inActive">
+		UPDATE slider_images
+		SET
+		activity=#{activity}
+		WHERE
+		no=#{no}
+	</update>
+
+	<!-- del -->
+	<update id="del">
+		UPDATE slider_images
+		SET
+		delete_flag='1'
 		WHERE
 		no=#{no}
 	</update>

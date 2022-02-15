@@ -81,14 +81,13 @@
 	</div>
 	<script>
 		$(function() {
+			var now = new Date();
 			var adult = $('#adult');
 			var child = $('#child');
 			var adultCost = 0;
 			var childCost = 0;
 			var totalCost = 0;
-
-			// 달력 최소값 설정
-			var now = new Date();
+			// 달력 최소값 최초 초기화
 			var yyyy = now.getFullYear();
 			var MM = (now.getMonth() + 1) < 10 ? '0' + (now.getMonth() + 1)
 					: now.getMonth() + 1; //1월 = 0
@@ -101,6 +100,8 @@
 			$('#startDate').attr('min', now);
 			$('#startDate').attr('value', now);
 			$('#endDate').attr('min', next);
+			$('#endDate').attr('value', next);
+
 
 			// 인원수 체크
 			function chkCost() {
