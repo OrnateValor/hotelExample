@@ -9,64 +9,69 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<form id="roomAddForm" method="post" enctype="multipart/form-data">
-		<div>
-			<div>ルームナンバー :</div>
+	<div>
+		<h3>ルーム新規作成</h3>
+	</div>
+	<div>
+		<form id="roomAddForm" method="post" enctype="multipart/form-data">
 			<div>
-				<input type="text" id="roomNum" name="roomNum"
-					value="${roomInfo.roomNum }">
-			</div>
-		</div>
-		<div>
-			<div>部屋名 :</div>
-			<div>
-				<input type="text" id="roomTitle" name="roomTitle"
-					value="${roomInfo.roomTitle }">
-			</div>
-		</div>
-		<div>
-			<div>最大人数 :</div>
-			<div>
-				<input type="number" id="max" name="max" min="0"
-					value="${roomInfo.max }">
-			</div>
-		</div>
-		<div>
-			<div>大人料金 :</div>
-			<div>
-				<input type="number" id="adultCost" name="adultCost" min="0"
-					value="${roomInfo.adultCost }">
-			</div>
-		</div>
-		<div>
-			<div>小人料金 :</div>
-			<div>
-				<input type="number" id="childCost" name="childCost" min="0"
-					value="${roomInfo.childCost }">
-			</div>
-		</div>
-		<div>
-			<div>詳細説明 :</div>
-			<div>
-				<textarea id="explanation" name="explanation" maxlength="4000">${roomInfo.explanation }</textarea>
-			</div>
-		</div>
-		<div>
-			<div>カラーコード :</div>
-			<div>
-				<input type="color" id="colorCode" name="colorCode">
-			</div>
-		</div>
-		<div>
-			<div>部屋イメージ :</div>
-			<div>
-				<input type="file" id="imgs" name="imgs">
+				<div>ルームナンバー :</div>
+				<div>
+					<input type="text" id="roomNum" name="roomNum"
+						value="${roomInfo.roomNum }">
+				</div>
 			</div>
 			<div>
-				<img id="preview">
+				<div>部屋名 :</div>
+				<div>
+					<input type="text" id="roomTitle" name="roomTitle"
+						value="${roomInfo.roomTitle }">
+				</div>
 			</div>
-		</div>
-	</form>
+			<div>
+				<div>最大人数 :</div>
+				<div>
+					<input type="number" id="max" name="max" min="0"
+						value="${roomInfo.max }">
+				</div>
+			</div>
+			<div>
+				<div>大人料金 :</div>
+				<div>
+					<input type="number" id="adultCost" name="adultCost" min="0"
+						value="${roomInfo.adultCost }">
+				</div>
+			</div>
+			<div>
+				<div>小人料金 :</div>
+				<div>
+					<input type="number" id="childCost" name="childCost" min="0"
+						value="${roomInfo.childCost }">
+				</div>
+			</div>
+			<div>
+				<div>詳細説明 :</div>
+				<div>
+					<textarea id="explanation" name="explanation" maxlength="4000">${roomInfo.explanation }</textarea>
+				</div>
+			</div>
+			<div>
+				<div>カラーコード :</div>
+				<div>
+					<input type="color" id="colorCode" name="colorCode">
+				</div>
+			</div>
+			<div>
+				<div>部屋イメージ :</div>
+				<div>
+					<input type="file" id="imgs" name="imgs">
+				</div>
+				<div>
+					<img id="preview">
+				</div>
+			</div>
+		</form>
+	</div>
 	<div id="btnBox">
 		<button type="submit" id="submit" class="btn btn-primary">登録</button>
 		<button type="reset" id="toMenu" class="btn btn-secondary">管理者メニューへ</button>

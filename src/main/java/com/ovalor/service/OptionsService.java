@@ -18,5 +18,7 @@ public interface OptionsService {
 	public int modOptions(OptionsVo option);
 
 	// Delete
-	public int delOptions(int no, char deleteFlag);
+	public int del(int no);
+
+	public int inActive(OptionsVo options);
 }

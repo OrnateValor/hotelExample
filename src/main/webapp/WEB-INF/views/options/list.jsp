@@ -45,8 +45,8 @@ td.item {
 						<td class="cost">${options.cost }</td>
 						<c:if test="${admin != null }">
 							<td><c:choose>
-									<c:when test='${options.activity eq "0".charAt(0) }'>活性</c:when>
-									<c:when test='${options.activity eq "1".charAt(0) }'>非活性</c:when>
+									<c:when test='${options.activity eq "1".charAt(0) }'>活性</c:when>
+									<c:when test='${options.activity eq "0".charAt(0) }'>非活性</c:when>
 								</c:choose></td>
 						</c:if>
 						<c:if test="${admin != null }">
@@ -66,7 +66,7 @@ td.item {
 		$('tr').click(
 				function() {
 					$('form').attr('action',
-							'/sliderImages/details/' + $(this).attr('id'));
+							'/options/details/' + $(this).attr('id'));
 					$('form').submit();
 				});
 	</script>

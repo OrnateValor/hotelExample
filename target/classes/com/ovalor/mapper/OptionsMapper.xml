@@ -33,10 +33,19 @@
 		WHERE no=#{no}
 	</update>
 	<!-- Delete - deleteFlag -->
-	<update id="delOptions">
+	<update id="del">
 		UPDATE options
-		SET delete_flag=#{deleteFlag},
+		SET delete_flag=1,
 		WHERE
 		no=${no}
 	</update>
+	<!-- inActive -->
+	<update id="inActive">
+		UPDATE options
+		SET
+		activity=#{activity}
+		WHERE
+		no=#{no}
+	</update>
+
 </mapper>

@@ -2,8 +2,6 @@ package com.ovalor.mapper;
 
 import java.util.ArrayList;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.ovalor.vo.OptionsVo;
 
 public interface OptionsMapper {
@@ -20,6 +18,9 @@ public interface OptionsMapper {
 	public int modOptions(OptionsVo option);
 
 	// Delete - deleteFlag
-	public int delOptions(@Param("no") int no, @Param("deleteFlag") char deleteFlag);
+	public int delOptions(int no);
+
+	// inActive
+	public int inActive(OptionsVo options);
 
 }

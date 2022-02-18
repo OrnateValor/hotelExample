@@ -43,8 +43,14 @@ public class OptionsServiceImple implements OptionsService {
 
 	// Delete
 	@Override
-	public int delOptions(int no, char deleteFlag) {
+	public int del(int no) {
 		// TODO Auto-generated method stub
-		return oMapper.delOptions(no, deleteFlag);
+		return oMapper.delOptions(no);
+	}
+
+	@Override
+	public int inActive(OptionsVo options) {
+		// TODO Auto-generated method stub
+		return oMapper.inActive(options);
 	}
 }
