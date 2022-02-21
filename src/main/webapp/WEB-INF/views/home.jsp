@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ page session="false"%>
@@ -42,23 +44,35 @@
 </head>
 <body>
 	<div id="" class="swiper sliderImgZone">
+		<h3>ルームプリビュー</h3>
 		<div class="swiper-wrapper">
 			<c:forEach var="sliderImages" items="${sliderImagesList }">
 				<div class="swiper-slide" role="group">
-					<img src="../../resources/Img/${sliderImages.fileName }"
+					<img id="img" src="../../resources/Img/${sliderImages.fileName }"
 						width="360px">
 				</div>
 			</c:forEach>
 		</div>
 		<div class="swiper-button-next"></div>
 		<div class="swiper-button-prev"></div>
+		<div>
+			<span>◎写真をクリックするとルームリストに移動します。</span>
+		</div>
 	</div>
+	<form action="/roomInfo/list">
+		
+	</form>
 	<script>
 		var swiper = new Swiper(".sliderImgZone", {
 			navigation : {
 				nextEl : ".swiper-button-next",
 				prevEl : ".swiper-button-prev",
 			}
+		});
+
+		$('img').click(function() {
+			console.log('img');
+			$('form').submit();
 		});
 	</script>
 </body>
